@@ -6,6 +6,7 @@ import { queryClient } from './api/queryClient'
 import { ThemeProvider } from './components/ThemeProvider'
 import { ToastProvider } from './components/ui/Toast'
 import { AuthProvider } from './features/auth/AuthContext'
+import { WorkspaceProvider } from './features/workspaces/WorkspaceContext'
 import App from './App.tsx'
 import './index.css'
 
@@ -16,7 +17,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <ToastProvider>
           <BrowserRouter>
             <AuthProvider>
-              <App />
+              <WorkspaceProvider>
+                <App />
+              </WorkspaceProvider>
             </AuthProvider>
           </BrowserRouter>
         </ToastProvider>

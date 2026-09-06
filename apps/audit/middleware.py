@@ -84,11 +84,14 @@ class AuditLoggingMiddleware(MiddlewareMixin):
                             payload[k] = "[REDACTED]"
 
             # Prepare audit record creation (defer to on_commit in production)
+            workspace = getattr(request, 'workspace', None)
+
             def _create_audit():
                 try:
                     from apps.audit.models import AuditLog
                     AuditLog.objects.create(
                         user=user if user is not None else None,
+                        workspace=workspace,
                         action=f"{method} {response.status_code}",
                         ip_address=ip,
                         path=path or '',

@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'apps.accounts',
     'apps.dashboard',
     'apps.core',
+    'apps.tenancy',
     'apps.audit',
     'apps.billing',
 ]
@@ -74,6 +75,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'apps.tenancy.middleware.WorkspaceContextMiddleware',
     'apps.accounts.middleware.Pending2FAMiddleware',
     'apps.audit.middleware.AuditLoggingMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',

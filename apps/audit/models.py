@@ -7,6 +7,9 @@ class AuditLog(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL
     )
+    workspace = models.ForeignKey(
+        'tenancy.Workspace', null=True, blank=True, on_delete=models.SET_NULL, related_name='audit_logs'
+    )
     action = models.CharField(max_length=255)
     ip_address = models.GenericIPAddressField(null=True, blank=True)
     path = models.CharField(max_length=1024)

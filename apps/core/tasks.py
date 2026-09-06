@@ -9,8 +9,11 @@ logger = logging.getLogger(__name__)
 
 # Autoretry on any Exception with exponential backoff (max 3 retries)
 @shared_task(bind=True, autoretry_for=(Exception,), retry_backoff=True, retry_kwargs={'max_retries': 3})
-def send_email_async(self, subject, message, recipient_list, template=None, context=None):
-    """Send email as a Celery task with retries on failure."""
+def send_email_async(self, subject, message, recipient_list, template=None, context=None, workspace_id=None):
+    """Send email as a Celery task with retries on failure.
+
+    workspace_id is optional but included for tenant-aware task routing in Part 1.
+    """
     try:
         html_message = None
         if template and context:

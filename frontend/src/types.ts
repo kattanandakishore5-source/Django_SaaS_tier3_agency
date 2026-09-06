@@ -20,6 +20,23 @@ export interface User {
   created_at: string;
 }
 
+export interface Workspace {
+  id: string;
+  name: string;
+  slug: string;
+  owner: number;
+  is_active: boolean;
+  role?: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface WorkspaceCurrentResponse {
+  workspace: Workspace;
+  role: string;
+  membership_id: number | null;
+}
+
 export interface Project {
   id: number;
   name: string;

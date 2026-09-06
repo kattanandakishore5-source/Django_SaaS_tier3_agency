@@ -39,7 +39,9 @@ def create_user_account(email, password, first_name='', last_name=''):
         last_name=last_name,
     )
 
-    # Dispatch email task only after DB transaction commits to avoid race conditions
+    # Dispatch email task only after DB transaction commits to avoid race conditions.
+    # workspace_id=None here because account creation is user-centric (pre-workspace).
+    # In Part 2 this can be wired to the user's default workspace.
     if getattr(settings, 'TESTING', False):
         # In test environments, execute dispatch immediately so unit tests can assert calls
         core_utils.send_email_async.delay(
@@ -47,6 +49,7 @@ def create_user_account(email, password, first_name='', last_name=''):
             message=f'Thank you for signing up, {first_name}!',
             recipient_list=[email],
             template='welcome',
+            workspace_id=None,
         )
     else:
         transaction.on_commit(lambda: core_utils.send_email_async.delay(
@@ -54,6 +57,7 @@ def create_user_account(email, password, first_name='', last_name=''):
             message=f'Thank you for signing up, {first_name}!',
             recipient_list=[email],
             template='welcome',
+            workspace_id=None,
         ))
     return user
 
@@ -78,12 +82,14 @@ def initiate_password_reset(email, base_url):
             subject='Reset Your Password',
             message=f'Click here to reset: {reset_url}',
             recipient_list=[email],
+            workspace_id=None,
         )
     else:
         transaction.on_commit(lambda: core_utils.send_email_async.delay(
             subject='Reset Your Password',
             message=f'Click here to reset: {reset_url}',
             recipient_list=[email],
+            workspace_id=None,
         ))
     return True
 
@@ -135,12 +141,14 @@ def initiate_magic_link(email, base_url):
             subject='Your Secure Magic Login Link',
             message=f'Click the link to log in: {magic_url}',
             recipient_list=[email],
+            workspace_id=None,
         )
     else:
         transaction.on_commit(lambda: core_utils.send_email_async.delay(
             subject='Your Secure Magic Login Link',
             message=f'Click the link to log in: {magic_url}',
             recipient_list=[email],
+            workspace_id=None,
         ))
     return True
 

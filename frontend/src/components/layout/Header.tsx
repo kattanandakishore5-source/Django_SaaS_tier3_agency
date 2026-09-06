@@ -3,6 +3,7 @@ import { Menu, Moon, Sun, User, LogOut } from 'lucide-react';
 import { useTheme } from '../ThemeProvider';
 import { useAuth } from '../../features/auth/AuthContext';
 import { useLogout } from '../../features/auth/hooks';
+import { WorkspaceSwitcher } from '../../features/workspaces/WorkspaceSwitcher';
 import { Button } from '../ui/Button';
 
 interface HeaderProps {
@@ -26,6 +27,8 @@ export function Header({ onMenuClick, title = 'Dashboard' }: HeaderProps) {
       </div>
 
       <div className="flex items-center gap-2">
+        <WorkspaceSwitcher />
+
         <Button
           variant="ghost"
           size="icon"

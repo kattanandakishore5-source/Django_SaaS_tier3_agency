@@ -3,4 +3,6 @@ export const queryKeys = {
   projects: ['projects'] as const,
   dashboardStats: ['dashboardStats'] as const,
   subscription: ['subscription'] as const,
+  workspaces: ['workspaces'] as const,
+  currentWorkspace: ['currentWorkspace'] as const,
 };
