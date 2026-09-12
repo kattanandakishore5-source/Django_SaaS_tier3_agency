@@ -27,7 +27,7 @@ if command -v python3 &> /dev/null; then
     pip install -r requirements.txt
     echo -e "${GREEN}✓ Dependencies installed${NC}"
 else
-    echo -e "${YELLOW}Python not found. Please install Python 3.11+${NC}"
+    echo -e "${YELLOW}Python not found. Please install Python 3.12+${NC}"
     exit 1
 fi
 

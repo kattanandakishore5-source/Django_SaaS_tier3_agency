@@ -15,19 +15,24 @@ def send_email_async(self, subject, message, recipient_list, template=None, cont
     workspace_id is optional but included for tenant-aware task routing in Part 1.
     """
     try:
+        from django.core.mail import EmailMultiAlternatives
         html_message = None
         if template and context:
             html_message = render_to_string(f'emails/{template}.html', context)
             message = strip_tags(html_message)
 
-        send_mail(
-            subject,
-            message,
-            settings.EMAIL_HOST_USER,
-            recipient_list,
-            html_message=html_message,
-            fail_silently=False,
+        from_email = getattr(settings, 'DEFAULT_FROM_EMAIL', settings.EMAIL_HOST_USER)
+        msg = EmailMultiAlternatives(
+            subject=subject,
+            body=message,
+            from_email=from_email,
+            to=recipient_list
         )
+        
+        if html_message:
+            msg.attach_alternative(html_message, "text/html")
+            
+        msg.send(fail_silently=False)
         return f"Email sent to {recipient_list}"
     except Exception as exc:
         # Log and re-raise to trigger autoretry

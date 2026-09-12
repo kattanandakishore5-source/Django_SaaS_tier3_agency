@@ -30,6 +30,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="project",
             name="workspace",
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name="projects", to="tenancy.workspace"),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.DB_CASCADE, related_name="projects", to="tenancy.workspace"),
         ),
     ]

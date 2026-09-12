@@ -6,7 +6,7 @@ from django.utils import timezone
 class StripeCustomer(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
+        on_delete=models.DB_CASCADE,
         related_name='stripe_customer',
     )
     stripe_customer_id = models.CharField(max_length=255, unique=True, db_index=True)
@@ -29,7 +29,7 @@ class Subscription(models.Model):
 
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
+        on_delete=models.DB_CASCADE,
         related_name='subscriptions',
     )
     stripe_subscription_id = models.CharField(max_length=255, unique=True, db_index=True)

@@ -22,7 +22,7 @@ if not exist .env (
 REM Check Python
 python --version >nul 2>&1
 if errorlevel 1 (
-    echo Error: Python not found. Please install Python 3.11+
+    echo Error: Python not found. Please install Python 3.12+
     exit /b 1
 )
 

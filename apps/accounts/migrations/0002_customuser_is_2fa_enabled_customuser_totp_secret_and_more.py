@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('expires_at', models.DateTimeField()),
                 ('used', models.BooleanField(default=False)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='magic_link_tokens', to=settings.AUTH_USER_MODEL)),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.DB_CASCADE, related_name='magic_link_tokens', to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]

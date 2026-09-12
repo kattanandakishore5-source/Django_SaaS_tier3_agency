@@ -53,7 +53,7 @@ class CustomUser(AbstractUser):
 
 
 class PasswordReset(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.DB_CASCADE)
     token = models.CharField(max_length=255, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     expires_at = models.DateTimeField()
@@ -71,7 +71,7 @@ class PasswordReset(models.Model):
 
 
 class MagicLinkToken(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='magic_link_tokens')
+    user = models.ForeignKey(CustomUser, on_delete=models.DB_CASCADE, related_name='magic_link_tokens')
     token = models.CharField(max_length=255, unique=True, db_index=True)
     created_at = models.DateTimeField(auto_now_add=True)
     expires_at = models.DateTimeField()

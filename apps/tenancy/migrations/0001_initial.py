@@ -68,8 +68,8 @@ class Migration(migrations.Migration):
                 ("is_active", models.BooleanField(default=True)),
                 ("created_at", models.DateTimeField(auto_now_add=True)),
                 ("updated_at", models.DateTimeField(auto_now=True)),
-                ("user", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name="workspace_memberships", to=settings.AUTH_USER_MODEL)),
-                ("workspace", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name="memberships", to="tenancy.workspace")),
+                ("user", models.ForeignKey(on_delete=django.db.models.deletion.DB_CASCADE, related_name="workspace_memberships", to=settings.AUTH_USER_MODEL)),
+                ("workspace", models.ForeignKey(on_delete=django.db.models.deletion.DB_CASCADE, related_name="memberships", to="tenancy.workspace")),
             ],
             options={
                 "ordering": ["workspace", "role"],
@@ -89,7 +89,7 @@ class Migration(migrations.Migration):
                 ("accepted_at", models.DateTimeField(blank=True, null=True)),
                 ("created_at", models.DateTimeField(auto_now_add=True)),
                 ("invited_by", models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name="sent_invitations", to=settings.AUTH_USER_MODEL)),
-                ("workspace", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name="invitations", to="tenancy.workspace")),
+                ("workspace", models.ForeignKey(on_delete=django.db.models.deletion.DB_CASCADE, related_name="invitations", to="tenancy.workspace")),
             ],
             options={
                 "ordering": ["-created_at"],
@@ -100,7 +100,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="WorkspaceSettings",
             fields=[
-                ("workspace", models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, primary_key=True, related_name="settings", serialize=False, to="tenancy.workspace")),
+                ("workspace", models.OneToOneField(on_delete=django.db.models.deletion.DB_CASCADE, primary_key=True, related_name="settings", serialize=False, to="tenancy.workspace")),
                 ("timezone", models.CharField(default="UTC", max_length=64)),
                 ("locale", models.CharField(default="en", max_length=16)),
                 ("created_at", models.DateTimeField(auto_now_add=True)),

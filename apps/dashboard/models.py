@@ -4,7 +4,7 @@ from apps.accounts.models import CustomUser
 
 class Dashboard(models.Model):
     """User dashboard preferences"""
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='dashboard')
+    user = models.OneToOneField(CustomUser, on_delete=models.DB_CASCADE, related_name='dashboard')
     theme = models.CharField(
         max_length=10,
         choices=[('light', 'Light'), ('dark', 'Dark')],

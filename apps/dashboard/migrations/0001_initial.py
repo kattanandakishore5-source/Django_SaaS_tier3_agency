@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('sidebar_collapsed', models.BooleanField(default=False)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='dashboard', to=settings.AUTH_USER_MODEL)),
+                ('user', models.OneToOneField(on_delete=django.db.models.deletion.DB_CASCADE, related_name='dashboard', to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]
